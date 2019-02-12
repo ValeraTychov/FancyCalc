@@ -277,7 +277,13 @@ namespace FancyCalc
             for (int i = 0; i < availableOperators.Count; i++)
             {
                 int indexStartPosition = index;
-                string operatorToken = GetSubstring(() => Contains(availableOperators[i].Sign, expression[index]));
+                Func<bool> condition = () =>
+                {
+                    bool firstCondition = (index - indexStartPosition) < availableOperators[i].Sign.Length;
+                    bool secondCondition = Contains(availableOperators[i].Sign, expression[index]);
+                    return firstCondition && secondCondition;
+                };
+                string operatorToken = GetSubstring(condition);
                 if (operatorToken == availableOperators[i].Sign)
                     return availableOperators[i];
                 else index = indexStartPosition;

@@ -46,6 +46,8 @@ namespace FancyCalc
         [TestCase("-4 * 5", ExpectedResult = -20)]
         [TestCase("Abs(-5)", ExpectedResult = 5)]
         [TestCase("-Abs(-5)", ExpectedResult = -5)]
+        [TestCase("Abs((((2+2)*5)+Abs(3*-5))*-1)", ExpectedResult = 35)]
+        [TestCase("(((2+2)*5)+Abs(3*-5))*-1", ExpectedResult = -35)]
         public double CalculateTestHidden(string expression)
         {
             FancyCalcEnguine calc = new FancyCalcEnguine();
